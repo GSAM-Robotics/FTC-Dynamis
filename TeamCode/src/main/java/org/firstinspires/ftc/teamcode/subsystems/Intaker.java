@@ -24,6 +24,6 @@ public class Intaker {
     }
 
     public void stop() {
-        torqueMotor.setPower(0);
+        t orqueMotor.setPower(0);
     }
 }
