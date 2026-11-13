@@ -43,7 +43,7 @@ public class MainTeleOp extends OpMode {
 
         telemetry.addData("Drive", drive);
         telemetry.addData("Turn", turn);
-        telemetry.addData("Intake", gamepad1.right_bumper);
+        telemetry.addData("Intake", activeIntaker);
         telemetry.update();
     }
 
