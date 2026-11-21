@@ -26,8 +26,13 @@ public class Drivetrain {
             rightPower /= max;
         }
 
-        leftMotor.setPower(leftPower);
-        rightMotor.setPower(rightPower);
+        leftMotor.setPower(leftPower*0.7);
+        rightMotor.setPower(rightPower*0.7);
+    }
+
+    public void setPower(double leftPower, double rightPower) {
+        leftMotor.setPower(leftPower*0.7);
+        rightMotor.setPower(rightPower*0.7);
     }
 
     public void stop() {
