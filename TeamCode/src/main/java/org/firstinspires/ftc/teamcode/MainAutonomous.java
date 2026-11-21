@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.IMU;
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 import org.firstinspires.ftc.teamcode.control.Odometry;
 
@@ -32,7 +33,7 @@ public class MainAutonomous extends LinearOpMode {
                 imu,
                 drivetrain,
                 this,
-                0.0,
+                0.045,
                 560.0
         );
 
@@ -49,7 +50,13 @@ public class MainAutonomous extends LinearOpMode {
 
         odometry.update();
 
-        // Autonomous logic here
+        odometry.driveDistance(1.0);
+        odometry.turnLeft(90);
+        odometry.driveDistance(1.0);
+        odometry.turnLeft(90);
+        odometry.driveDistance(1.0);
+        odometry.turnLeft(90);
+        odometry.driveDistance(1.0);
 
         drivetrain.stop();
     }

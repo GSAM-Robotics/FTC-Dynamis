@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
-import org.firstinspires.ftc.teamcode.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 public class Odometry {
 
@@ -110,7 +110,7 @@ public class Odometry {
         double startTheta = theta;
 
         while (opMode.opModeIsActive()) {
-            drivetrain.setPower(0.40, -0.40);
+            drivetrain.setPower(-0.40, 0.40);
             update();
 
             if (angleDifferenceRad(theta, startTheta) >= targetAngleRad) {
@@ -128,7 +128,7 @@ public class Odometry {
         double startTheta = theta;
 
         while (opMode.opModeIsActive()) {
-            drivetrain.setPower(-0.40, 0.40);
+            drivetrain.setPower(0.40, -0.40);
             update();
 
             if (angleDifferenceRad(theta, startTheta) <= -targetAngleRad) {

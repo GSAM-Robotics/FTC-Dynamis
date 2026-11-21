@@ -1,22 +1,30 @@
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
-import org.firstinspires.ftc.teamcode.subsystems.Intaker;
 
 @TeleOp(name = "MainTeleOp")
 public class MainTeleOp extends OpMode {
 
     private Drivetrain drivetrain;
-    private Intaker intaker;
+    private CRServo servoLeft;
+    private CRServo servoRight;
+
     private boolean activeIntaker = false;
     private boolean lastRb = false;
 
     @Override
     public void init() {
         drivetrain = new Drivetrain(hardwareMap);
-        intaker = new Intaker(hardwareMap);
+
+        servoLeft = hardwareMap.get(CRServo.class, "servoLeft");
+        servoRight = hardwareMap.get(CRServo.class, "servoRight");
+
+        servoLeft.setPower(0.0);
+        servoRight.setPower(0.0);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -36,9 +44,11 @@ public class MainTeleOp extends OpMode {
         lastRb = currentRb;
 
         if (activeIntaker) {
-            intaker.ControlIntaker(1.0);
+            servoLeft.setPower(1.0);
+            servoRight.setPower(1.0);
         } else {
-            intaker.stop();
+            servoLeft.setPower(0.0);
+            servoRight.setPower(0.0);
         }
 
         telemetry.addData("Drive", drive);
@@ -50,6 +60,7 @@ public class MainTeleOp extends OpMode {
     @Override
     public void stop() {
         drivetrain.stop();
-        intaker.stop();
+        servoLeft.setPower(0.0);
+        servoRight.setPower(0.0);
     }
 }
