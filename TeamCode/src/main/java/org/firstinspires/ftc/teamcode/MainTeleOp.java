@@ -23,6 +23,8 @@ public class MainTeleOp extends OpMode {
         servoLeft = hardwareMap.get(CRServo.class, "servoLeft");
         servoRight = hardwareMap.get(CRServo.class, "servoRight");
 
+        servoRight.setDirection(CRServo.Direction.REVERSE);
+
         servoLeft.setPower(0.0);
         servoRight.setPower(0.0);
 
