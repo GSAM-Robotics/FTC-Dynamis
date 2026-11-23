@@ -50,13 +50,9 @@ public class MainAutonomous extends LinearOpMode {
 
         odometry.update();
 
-        odometry.driveDistance(1.0);
-        odometry.turnLeft(90);
-        odometry.driveDistance(1.0);
-        odometry.turnLeft(90);
-        odometry.driveDistance(1.0);
-        odometry.turnLeft(90);
-        odometry.driveDistance(1.0);
+        odometry.turnLeft(360);
+
+
 
         drivetrain.stop();
     }

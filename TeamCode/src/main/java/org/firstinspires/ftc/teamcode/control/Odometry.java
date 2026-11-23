@@ -13,6 +13,7 @@ public class Odometry {
     private double x = 0.0;
     private double y = 0.0;
     private double theta = 0.0;
+    private double accumulatedAngle = 0.0;
 
     private final DcMotor leftMotor;
     private final DcMotor rightMotor;
@@ -78,6 +79,7 @@ public class Odometry {
         double distance = (dLeft + dRight) / 2.0;
 
         double deltaTheta = angleDifferenceRad(currentTheta, lastTheta);
+        accumulatedAngle = 0.0;
         double thetaMid = lastTheta + deltaTheta / 2.0;
 
         x += distance * Math.cos(thetaMid);
@@ -104,16 +106,14 @@ public class Odometry {
     }
 
     public void turnLeft(double targetAngleDeg) {
-        double targetAngleRad = degreesToRadians(targetAngleDeg);
-
+        accumulatedAngle = 0.0;
         update();
-        double startTheta = theta;
 
         while (opMode.opModeIsActive()) {
             drivetrain.setPower(-0.40, 0.40);
             update();
 
-            if (angleDifferenceRad(theta, startTheta) >= targetAngleRad) {
+            if (accumulatedAngle >= degreesToRadians(targetAngleDeg)) {
                 break;
             }
         }
@@ -122,16 +122,14 @@ public class Odometry {
     }
 
     public void turnRight(double targetAngleDeg) {
-        double targetAngleRad = degreesToRadians(targetAngleDeg);
-
+        accumulatedAngle = 0.0;
         update();
-        double startTheta = theta;
 
         while (opMode.opModeIsActive()) {
             drivetrain.setPower(0.40, -0.40);
             update();
 
-            if (angleDifferenceRad(theta, startTheta) <= -targetAngleRad) {
+            if (accumulatedAngle <= -degreesToRadians(targetAngleDeg)) {
                 break;
             }
         }
@@ -165,6 +163,7 @@ public class Odometry {
         x = 0.0;
         y = 0.0;
         theta = 0.0;
+        accumulatedAngle = 0.0;
 
         imu.resetYaw();
 
